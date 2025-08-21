@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Chiriboga</title>
+		<link href="images/favicon.ico" rel="icon">
+		<link rel="manifest" href="manifest.json">
+		<style>
+			@font-face {
+			font-family: PlayBoldNisei;
+				src: url('cardrenderer/Play-Bold-Nisei.ttf');
+			font-weight: bold;
+			}
+		</style>
+		<script src="cardrenderer/webfont.js"></script>
+		<script>
+			WebFont.load({
+				custom: {
+					families: [
+						'PlayBoldNisei'
+					]
+				}
+			});
+		</script>
+		<style>		
+			.header a:visited {
+				color:white;
+			}			
+			.header a {
+				color:white;
+			}			
+			.header a:hover {
+				text-decoration: none;
+			}			
+			a {
+				text-decoration: none;
+				color:lightsteelblue;
+				font-weight:bold;
+				text-align: center;
+			}
+			.corp {
+				color:rgb(50,140,255);
+			}
+			.runner {
+				color:rgb(250,100,100);
+			}
+			img.corp {
+				border-style: solid;
+				border-color: rgb(50,140,255);
+				background-color: rgb(50,63,72);
+			}
+			img.runner {
+				border-style: solid;
+				border-color: rgb(250,100,100);
+				background-color: rgb(50,63,72);
+			}
+			a:hover {
+				color:white;
+				text-decoration:underline;
+			}
+			a:hover > img {
+				border-color: white;
+			}
+			.noselect {
+			  -webkit-touch-callout: none; /* iOS Safari */
+				-webkit-user-select: none; /* Safari */
+				 -khtml-user-select: none; /* Konqueror HTML */
+				   -moz-user-select: none; /* Old versions of Firefox */
+					-ms-user-select: none; /* Internet Explorer/Edge */
+						user-select: none; /* Non-prefixed version, currently
+											  supported by Chrome, Edge, Opera and Firefox */
+			}
+			.nobreak {
+				white-space: nowrap;
+			}
+		</style>
+		<style>
+			/* Portrait (tall screen) */			
+			body {
+				font-family: "Lucida Console", Monaco, monospace;
+				color: white;
+				background:#354149;
+				background-image: url('images/bg.jpg');
+				background-size:cover;
+				padding-top:min(100px,12.5vw,9vh);
+				text-align:center;
+			}
+			.header {
+				background-color: rgb(62,71,80);
+				border-bottom:min(2px,0.25vw,0.18vh) solid black;
+				outline: min(2px,0.25vw,0.18vh) solid white;
+				color:white;
+				text-shadow: max(-2px,-0.25vw,-0.18vh) max(-2px,-0.25vw,-0.18vh) 0 black, min(2px,0.25vw,0.18vh) min(2px,0.25vw,0.18vh) 0 black, max(-2px,-0.25vw,-0.18vh) min(2px,0.25vw,0.18vh) 0 black, min(2px,0.25vw,0.18vh) max(-2px,-0.25vw,-0.18vh) 0 black;
+				text-align:center;
+				position:fixed;
+				left:0;
+				right:0;
+				top:0;
+			}
+			.footer {
+				background-color: rgb(62,71,80);
+				outline: min(1px,0.125vw,0.09vh) solid white;
+				color:white;
+				text-align:center;
+				position:fixed;
+				left:0;
+				right:0;
+				bottom:0;
+				padding:min(10px,1.25vw,0.9vh);
+				font-size:min(16px,2vw,1.44vh);
+			}
+			.tutorial-row {
+				margin:auto;
+				margin-bottom: min(40px,5vw,3.6vh);
+				width:min(620px,77.5vw,55.8vh);
+				font-size:min(16px,2vw,1.44vh);
+			}
+			.cell {
+				width:min(310px,38.75vw,27.9vh);
+				height:min(310px,38.75vw,27.9vh);
+				margin:auto;
+			}
+			.cell.nosubtitle {
+				height:min(280px,35vw,25.2vh);
+			}
+			a.runner span.subtitle, a.corp span.subtitle {
+				font-size: min(14px,1.75vw,1.26vh);
+			}
+			a.runner span, a.corp span {
+				display:inline-block;
+				font-size: min(22px,2.75vw,1.98vh);
+			}
+			.header-contents {
+				vertical-align:middle;
+				font-size: min(32px,4vw,2.88vh);
+				margin:min(10px,1.25vw,0.9vh);
+			}
+			img.header-contents {
+				height:min(67px,8.375vw,6.03vh);
+			}
+			img.corp, img.runner {
+				width:min(200px,25vw,18vh);
+				border-radius: min(128px,16vw,11.52vh);
+				border-width: min(2px,0.25vw,0.18vh);
+			}
+			.tutorial {
+				width:min(40px,5vw,3.6vh);
+				height:min(40px,5vw,3.6vh);
+				border: min(2px,0.25vw,0.18vh) solid rgba(255,255,255,0.5);
+				border-radius: min(20px,2.5vw,1.8vh);
+				display:inline-block;
+				line-height:min(40px,5vw,3.6vh);
+				color:white;
+				font-family: 'PlayBoldNisei';
+				font-size:min(18px,2.25vw,1.62vh);
+			}
+			.tutorial:hover {
+				border: min(2px,0.25vw,0.18vh) solid white;
+				color:white;
+				font-weight: bold;
+				text-decoration: none;
+				cursor:pointer;
+			}
+			h3 {
+				margin-top:min(5px,0.625vw,0.45vh);
+				margin-bottom:min(10px,1.25vw,0.9vh);
+				font-size: min(18px,2.25vw,1.62vh);
+			}
+			.ltp-link {
+				margin-top:min(10px,1.25vw,0.9vh);
+				font-size: min(16px,2vw,1.44vh);
+			}			
+			.row-column {
+				display: inline-block;
+				width: min(310px,38.75vw,27.9vh);
+				margin:auto;
+				margin-bottom: min(60px,7.5vw,5.4vh);
+			}
+			.caption {
+				margin-top: min(8px,1vw,0.72vh);
+				margin-left: min(8px,1vw,0.72vh);
+				margin-right: min(8px,1vw,0.72vh);
+			}
+			.landscape-only {
+				display:none;
+			}
+			/* Landscape (wide screen) */
+			@media only screen and (min-aspect-ratio: 5/4) {			
+			body {
+				font-family: "Lucida Console", Monaco, monospace;
+				color: white;
+				background:#354149;
+				background-image: url('images/bg.jpg');
+				background-size:cover;
+				padding-top:min(100px,6.7vw,9.2vh);
+				text-align:center;
+			}
+			.header {
+				background-color: rgb(62,71,80);
+				border-bottom:min(2px,0.134vw,0.184vh) solid black;
+				outline: min(2px,0.134vw,0.184vh) solid white;
+				color:white;
+				text-shadow: max(-2px,-0.134vw,-0.184vh) max(-2px,-0.134vw,-0.184vh) 0 black, min(2px,0.134vw,0.184vh) min(2px,0.134vw,0.184vh) 0 black, max(-2px,-0.134vw,-0.184vh) min(2px,0.134vw,0.184vh) 0 black, min(2px,0.134vw,0.184vh) max(-2px,-0.134vw,-0.184vh) 0 black;
+				text-align:center;
+				position:fixed;
+				left:0;
+				right:0;
+				top:0;
+			}
+			.footer {
+				background-color: rgb(62,71,80);
+				outline: min(1px,0.067vw,0.092vh) solid white;
+				color:white;
+				text-align:center;
+				position:fixed;
+				left:0;
+				right:0;
+				bottom:0;
+				padding:min(10px,0.67vw,0.92vh);
+				font-size:min(16px,1.072vw,1.472vh);
+			}
+			.tutorial-row {
+				margin:auto;
+				margin-bottom: min(40px,2.68vw,3.68vh);
+				width:min(620px,41.54vw,57.04vh);
+				font-size:min(16px,1.072vw,1.472vh);
+			}
+			.cell {
+				width:min(310px,20.77vw,28.52vh);
+				height:min(310px,20.77vw,28.52vh);
+				margin:auto;
+			}
+			.cell.nosubtitle {
+				height:min(280px,18.76vw,25.76vh);
+			}
+			a.runner span.subtitle, a.corp span.subtitle {
+				font-size: min(14px,0.938vw,1.288vh);
+			}
+			a.runner span, a.corp span {
+				display:inline-block;
+				font-size: min(22px,1.474vw,2.024vh);
+			}
+			.header-contents {
+				vertical-align:middle;
+				font-size: min(32px,2.144vw,2.944vh);
+				margin:min(10px,0.67vw,0.92vh);
+			}
+			img.header-contents {
+				height:min(67px,4.489vw,6.164vh);
+			}
+			img.corp, img.runner {
+				width:min(200px,13.4vw,18.4vh);
+				border-radius: min(128px,8.576vw,11.776vh);
+				border-width: min(2px,0.134vw,0.184vh);
+			}
+			.tutorial {
+				width:min(40px,2.68vw,3.68vh);
+				height:min(40px,2.68vw,3.68vh);
+				border: min(2px,0.134vw,0.184vh) solid rgba(255,255,255,0.5);
+				border-radius: min(20px,1.34vw,1.84vh);
+				display:inline-block;
+				line-height:min(40px,2.68vw,3.68vh);
+				color:white;
+				font-family: 'PlayBoldNisei';
+				font-size:min(18px,1.206vw,1.656vh);
+			}
+			.tutorial:hover {
+				border: min(2px,0.134vw,0.184vh) solid white;
+				color:white;
+				font-weight: bold;
+				text-decoration: none;
+				cursor:pointer;
+			}
+			h3 {
+				margin-top:min(5px,0.335vw,0.46vh);
+				margin-bottom:min(10px,0.67vw,0.92vh);
+				font-size: min(18px,1.206vw,1.656vh);
+			}
+			.ltp-link {
+				margin-top:min(10px,0.67vw,0.92vh);
+				font-size: min(16px,1.072vw,1.472vh);
+			}			
+			.row-column {
+				display: flex;
+				flex-wrap: nowrap;
+				flex-direction: row;
+				width: min(1240px,83.08vw,114.08vh);
+				margin:auto;
+			}
+			a.runner {
+				flex: 1;
+				margin-bottom: min(40px,2.68vw,3.68vh);
+			}
+			a.corp {
+				flex: 1;
+				margin-bottom: min(60px,4.02vw,5.52vh);
+			}
+			.cell.nosubtitle {
+				height:min(310px,20.77vw,28.52vh);
+			}
+			.landscape-only {
+				display:initial;
+			}
+			.portrait-only {
+				display:none;
+			}
+			}		
+		</style>
+	</head>
+	<body>
+		<div class="header"><a href="engine.html?faceoff=true"><img class="header-contents" src="images/chiriboga_icon.png"><span class="header-contents">Chiriboga<span></a></div>
+		<div class="tutorial-row">
+			<h3>游戏教学</h3>
+			<a href="engine.html?p=r&mentor=0" class="tutorial noselect" title="Clicks and Runs">1</a>
+			<a href="engine.html?p=r&mentor=1" class="tutorial noselect" title="Credits and Runner Card Types">2</a>
+			<a href="engine.html?p=r&mentor=2" class="tutorial noselect" title="Ice and Icebreakers">3</a>
+			<a href="engine.html?p=r&mentor=3" class="tutorial noselect" title="Assets, Trash Costs, and Run Events">4</a>
+			<a href="engine.html?p=r&mentor=4" class="tutorial noselect" title="Advancing, Scoring, and Damage">5</a>
+			<a href="engine.html?p=c&mentor=5" class="tutorial noselect" title="Upgrades, Root, and Trash on Install">6</a><br/>
+			<div class="ltp-link">或阅读 <a href="https://nullsignal.games/zh-hans/%e6%96%b0%e6%89%8b%e6%8c%87%e5%8d%97/">Null Signal Games' 新手指南</a></div>
+		</div>
+		<div class="row-column">
+			<div class="cell nosubtitle"><a class="runner" href="engine.html?ap=6&p=r&r=N4IglgJgpgdgLmOBPEAuEB2AbCANCAZyQLigFsBxAQ1IHcqVUBtLXVgRgCZcueBmHgBYeAVlE8AHLk4AGaXM7tpSzq1XSMG6VM46dATmmG+ck7jN9ul8wL63BAXQC+QA&c=N4IglgJgpgdgLmOBPEAuEB2DIA0IDOS+cUAtgOICGJA7pSqgNoDMGOr7AnFzgCwAMfQbwBMfAKwS+ANhl82vNtN45lqpRtXdp3DIL04MARkMmMY84YvNDNjCvuHJGZ+IC6AXyA"><img class="runner" src="images/menu_runner_1.png"><div class="caption"><span>潜袭者教学牌组</span></div></a></div>
+			<div class="cell nosubtitle"><a class="runner" href="engine.html?p=r&r=N4IglgJgpgdgLmOBPEAuEB2AbCANCAZyQLigFsBxAQ1IHcqVUBtLXVgRgCZcueBmHgBYeAVlE8AHLk4AGaXM7tpSzq1XSMG6VM46dATmmG+ck7jN9ul8wL63h3blKnslr6Y8cPBAXQC+QA&c=N4IglgJgpgdgLmOBPEAuEB2DIA0IDOS+cUAtgOICGJA7pSqgNoDMGOr7AnFzgCwAMfQbwBMfAKwS+ANhl82vNtN45lqpRtXdp3DIL04MARkMmMY84YvNDNjCvuHJGZ5PEr3OcbO9e24-wAOVUlpYLCAXQBfIA"><img class="runner" src="images/menu_runner_2.png"><div class="caption"><span>潜袭者进阶牌组</span></div></a></div>
+			<div class="cell"><a class="runner" href="decklauncher.html?sets=systemgateway&p=r&r=random"><img class="runner" src="images/menu_runner_3_sg.png"><div class="caption"><span>潜袭者牌组构筑</span><span class="subtitle">(仅限核心网关)</span></div></a></div>
+			<div class="cell"><a class="runner" href="decklauncher.html?sets=systemgateway-systemupdate2021&p=r&r=random"><img class="runner" src="images/menu_runner_4_sg_su21.png"><div class="caption"><span>潜袭者牌组构筑</span><span class="subtitle">(加系统革新2021)</span></div></a></div>
+		</div><div class="row-column">
+			<div class="cell nosubtitle"><a class="corp" href="engine.html?ap=6&p=c&c=N4IglgJgpgdgLmOBPEAuEB2DIA0IDOS+cUAtgOICGJA7pSqgNoDMGOr7AnFzgCwAMfQbwBMfAKwS+ANhl82vNtN45lqpRtXdp3DIL04MARkMmMY84YvNDNjCvuHJGZ+IC6AXyA&r=N4IglgJgpgdgLmOBPEAuEB2AbCANCAZyQLigFsBxAQ1IHcqVUBtLXVgRgCZcueBmHgBYeAVlE8AHLk4AGaXM7tpSzq1XSMG6VM46dATmmG+ck7jN9ul8wL63BAXQC+QA"><img class="corp" src="images/menu_corp_1.png"><div class="caption"><span>公司教学牌组</span></div></a></div>
+			<div class="cell nosubtitle"><a class="corp" href="engine.html?p=c&c=N4IglgJgpgdgLmOBPEAuEB2DIA0IDOS+cUAtgOICGJA7pSqgNoDMGOr7AnFzgCwAMfQbwBMfAKwS+ANhl82vNtN45lqpRtXdp3DIL04MARkMmMY84YvNDNjCvuHJGZ5PEr3OcbO9e24-wAOVUlpYLCAXQBfIA&r=N4IglgJgpgdgLmOBPEAuEB2AbCANCAZyQLigFsBxAQ1IHcqVUBtLXVgRgCZcueBmHgBYeAVlE8AHLk4AGaXM7tpSzq1XSMG6VM46dATmmG+ck7jN9ul8wL63h3blKnslr6Y8cPBAXQC+QA"><img class="corp" src="images/menu_corp_2.png"><div class="caption"><span>公司进阶牌组</span></div></a></div>
+			<div class="cell"><a class="corp" href="decklauncher.html?sets=systemgateway&p=c&c=random"><img class="corp" src="images/menu_corp_3_sg.png"><div class="caption"><span>公司牌组构筑</span><span class="subtitle">(仅限核心网关)</span></div></a></div>
+			<div class="cell"><a class="corp" href="decklauncher.html?sets=systemgateway-systemupdate2021&p=c&c=random"><img class="corp" src="images/menu_corp_4_sg_su21.png"><div class="caption"><span>公司牌组构筑</span><span class="subtitle">(加系统革新2021)</span></div></a></div>
+		</div>
+		<div class="footer">
+			<span id="dev-info"></span><span class="nobreak">源代码位于 <a href="https://github.com/bobtheuberfish/chiriboga">GitHub</a></span> 
+			<span class="landscape-only">&nbsp;| &nbsp;</span><span class="portrait-only"><br></span><span class="nobreak">汉化：螺旋的风筝、Eric03742</span>
+		</div>
+	</body>
+</html>
