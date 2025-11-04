@@ -1075,7 +1075,7 @@ tutorial[1] = {
       str: "Runner 1.3",
       action: function () {
 		TutorialMessage(
-		 "除了进行潜袭，你的回合可以执行的其他行动包括：\n• 获得1信用点（点击信用点图标）\n• 打出一张事件卡牌（将卡牌从你手牌拖到上面然后松开）\n• 触发一个能力（点击在场的卡牌）\n\n使用这些行动以让你回合结束时有13信用点。"
+		 "除了进行潜袭，你的回合可以执行的其他行动包括：\n• 获得1信用点（点击信用点图标）\n• 打出一张事件卡牌（将牌从手牌拖到上面后松开）\n• 触发一个能力（点击在场的卡牌）\n\n使用这些行动以让你回合结束时有13信用点。"
         );
 		TutorialWhitelist = null; //not using whitelist
 		TutorialBlacklist = ['run','draw'];
