@@ -1,9 +1,13 @@
-version: '3'
 services:
-  web:
-    image: netrunner
-    build: .
-    container_name: netrunner
+  netrunner-tutorial:
+    container_name: netrunner-tutorial
+    image: netrunner-tutorial:latest
     restart: always
     ports:
-      - "3000:80"
+      - 6701:80
+    networks:
+      - netrunner
+
+networks:
+  netrunner:
+    external: true

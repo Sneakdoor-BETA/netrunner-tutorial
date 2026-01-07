@@ -1,3 +1,4 @@
-FROM php:7.2-apache
-COPY src/ /var/www/html/
+FROM nginx:alpine
+LABEL authors="Eric03742"
+COPY src/ /usr/share/nginx/html/
 EXPOSE 80
